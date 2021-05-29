@@ -15,6 +15,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -59,17 +61,24 @@ public class MainViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+        showSongs();
+    }  
     
     @FXML
-    private void handleButtonAction(Event event){
-        System.out.println("Button clicked");
+    private void handleButtonAction(ActionEvent event){
+        if (event.getSource() == btnInsert){
+            insertRecord();
+        }else if (event.getSource() == btnUpdate){
+            updateRecord();
+        }else if (event.getSource() == btnDelete){
+            deleteRecord();
+        }
     }
     
     public Connection getConnection(){
         Connection conn;
         try{
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/song_library_crud", "root", "");
             return conn;
         }catch(Exception ex){
             System.out.println("ERROR : " + ex.getMessage());
@@ -80,15 +89,15 @@ public class MainViewController implements Initializable {
     private ObservableList<Songs> getBooksList(){
         ObservableList<Songs> songList = FXCollections.observableArrayList();
         Connection conn = getConnection();
-        String query = "SELECT * FROM Songs";
+        String query = "SELECT * FROM songs";
         Statement st;
-        ResultSet res;
+        ResultSet rs;
         try {
             st = conn.createStatement();
-            res = st.executeQuery(query);
+            rs = st.executeQuery(query);
             Songs songs;
-            while(res.next()){
-                songs = new Songs(res.getInt("id"), res.getString("title"), res.getString("artist"), res.getString("genre"), res.getInt("year"));
+            while(rs.next()){
+                songs = new Songs(rs.getInt("id"), rs.getString("title"), rs.getString("artist"), rs.getString("genre"), rs.getInt("year"));
                 songList.add(songs);
             }
         }catch(Exception ex){
@@ -97,7 +106,7 @@ public class MainViewController implements Initializable {
         return songList;
     }
             
-    private void showBooks(){
+    private void showSongs(){
         ObservableList<Songs> list = getBooksList();
         
         colId.setCellValueFactory(new PropertyValueFactory<Songs, Integer>("id"));
@@ -105,5 +114,38 @@ public class MainViewController implements Initializable {
         colArtist.setCellValueFactory(new PropertyValueFactory<Songs, String>("artist"));
         colGenre.setCellValueFactory(new PropertyValueFactory<Songs, String>("genre"));
         colYear.setCellValueFactory(new PropertyValueFactory<Songs, Integer>("year"));
+        
+        tbSongs.setItems(list);
+    }
+    
+    private void insertRecord(){
+        String query = "INSERT INTO songs VALUES (" + tfId.getText() + ",'" + tfTitle.getText() + "','" + tfArtist.getText() + "','"
+                + tfGenre.getText() + "'," + tfYear.getText() + ")";
+        executeQuery(query);
+        showSongs();
+    }
+    
+    private void updateRecord(){
+        String query = "UPDATE `songs` SET`title`='" + tfTitle.getText() + "',`artist`='" + tfArtist.getText() 
+            + "',`genre`='" + tfGenre.getText() + "',`year`='" + tfYear.getText() + "' WHERE `id`='" + tfId.getText() + "'";
+        executeQuery(query);
+        showSongs();
+    }
+
+    private void deleteRecord(){
+        String query = "DELETE FROM `songs` WHERE `id`='" + tfId.getText() + "'";
+        executeQuery(query);
+        showSongs();
+    }
+    
+    private void executeQuery(String query) {
+        Connection conn = getConnection();
+        Statement st;
+        try{
+            st = conn.createStatement();
+            st.executeUpdate(query);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }

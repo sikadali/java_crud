@@ -35,9 +35,9 @@
                               <TextField fx:id="tfYear" />
                            </children>
                         </VBox>
-                        <Button fx:id="btnInsert" layoutX="31.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: #ff6659;" text="Insert" />
-                        <Button fx:id="btnUpdate" layoutX="123.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: #ff6659;" text="Update" />
-                        <Button fx:id="btnDelete" layoutX="215.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: #ff6659;" text="Delete" />
+                        <Button fx:id="btnInsert" layoutX="31.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="68.0" text="Insert" />
+                        <Button fx:id="btnUpdate" layoutX="123.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="68.0" text="Update" />
+                        <Button fx:id="btnDelete" layoutX="215.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="68.0" text="Delete" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="423.0">
