@@ -23,7 +23,7 @@ public class CrudFX extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
         Scene scene = new Scene(root);
         
-        stage.setTitle("CRUD App");
+        stage.setTitle("CRUD App JavaFX");
         stage.setScene(scene);
         stage.show();
     }

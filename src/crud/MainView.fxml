@@ -6,10 +6,12 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="372.0" prefWidth="917.0" style="-fx-background-color: #d32f2f;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crud.MainViewController">
+<AnchorPane id="AnchorPane" prefHeight="372.0" prefWidth="917.0" style="-fx-background-color: #8eacbb;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crud.MainViewController">
    <children>
       <AnchorPane layoutY="26.0" prefHeight="340.0" prefWidth="917.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -35,14 +37,40 @@
                               <TextField fx:id="tfYear" />
                            </children>
                         </VBox>
-                        <Button fx:id="btnInsert" layoutX="31.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="68.0" text="Insert" />
-                        <Button fx:id="btnUpdate" layoutX="123.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="68.0" text="Update" />
-                        <Button fx:id="btnDelete" layoutX="215.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="68.0" text="Delete" />
+                        <Button fx:id="btnInsert" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="36.0" prefWidth="83.0" text="Insert">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/baseline_add_box_black_24dp.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="btnUpdate" layoutX="115.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="36.0" prefWidth="83.0" text="Update">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/baseline_edit_black_24dp.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="btnDelete" layoutX="215.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="36.0" prefWidth="83.0" text="Delete">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/baseline_delete_forever_black_24dp.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <ImageView fx:id="iconClear" fitHeight="16.0" fitWidth="16.0" layoutX="277.0" layoutY="39.0" onMouseClicked="#handleMouseAction" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/baseline_backspace_black_24dp.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="423.0">
                      <children>
-                        <TableView fx:id="tbSongs" layoutX="19.0" layoutY="31.0" prefHeight="260.0" prefWidth="565.0">
+                        <TableView fx:id="tbSongs" layoutX="19.0" layoutY="31.0" onMouseClicked="#handleMouseAction" prefHeight="260.0" prefWidth="565.0">
                           <columns>
                             <TableColumn fx:id="colId" prefWidth="44.0" text="ID" />
                             <TableColumn fx:id="colTitle" prefWidth="182.0" text="Title" />

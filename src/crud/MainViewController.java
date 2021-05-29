@@ -18,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -54,6 +56,8 @@ public class MainViewController implements Initializable {
     private TableColumn<Songs, String> colGenre;
     @FXML
     private TableColumn<Songs, Integer> colYear;
+    @FXML
+    private ImageView iconClear;
 
     /**
      * Initializes the controller class.
@@ -123,6 +127,7 @@ public class MainViewController implements Initializable {
                 + tfGenre.getText() + "'," + tfYear.getText() + ")";
         executeQuery(query);
         showSongs();
+        resetDisplay();
     }
     
     private void updateRecord(){
@@ -130,6 +135,7 @@ public class MainViewController implements Initializable {
             + "',`genre`='" + tfGenre.getText() + "',`year`='" + tfYear.getText() + "' WHERE `id`='" + tfId.getText() + "'";
         executeQuery(query);
         showSongs();
+        resetDisplay();
     }
 
     private void deleteRecord(){
@@ -148,4 +154,27 @@ public class MainViewController implements Initializable {
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    private void handleMouseAction(MouseEvent event) {
+        if(event.getSource() == tbSongs){
+            Songs song = tbSongs.getSelectionModel().getSelectedItem();
+            tfId.setText("" + song.getId());
+            tfTitle.setText(song.getTitle());
+            tfArtist.setText(song.getArtist());
+            tfGenre.setText(song.getGenre());
+            tfYear.setText("" + song.getYear());
+        }else if (event.getSource() == iconClear){
+            resetDisplay();
+        }
+    }
+
+    private void resetDisplay() {
+        tfId.setText("");
+        tfTitle.setText("");
+        tfArtist.setText("");
+        tfGenre.setText("");
+        tfYear.setText("");
+    }
+    
 }
